@@ -1,0 +1,22 @@
+# Compiled binaries
+*.o
+*.out
+*.exe
+
+# Object files
+*.obj
+*.suo
+
+# Build directories
+./bin/
+./build/
+
+# VSCode files
+.vscode/
+
+# mbedtls library
+./mbedtls
+
+# System files
+.DS_Store
+Thumbs.db
