@@ -9,9 +9,16 @@ FetchContent_Declare(
 	GIT_TAG v3.5.1
 )
 
-# Fetches and builds mbedtls from source code as a subfolder
+# Fetches and builds mbedtls from source code as a part of the build directory
+# It may take a little while to download the library
 FetchContent_MakeAvailable(mbedtls)
 
-add_subdirectory(include)
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+set(LIB_DIR ${CMAKE_SOURCE_DIR}/lib)
+
+set(MBEDTLS_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/mbedtls/include)
+
+
 add_subdirectory(lib)
 add_subdirectory(src)
