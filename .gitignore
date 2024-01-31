@@ -8,14 +8,14 @@
 *.suo
 
 # Build directories
-./bin/
-./build/
+bin/
+build/
 
 # VSCode files
 .vscode/
 
 # mbedtls library
-./mbedtls
+mbedtls
 
 # System files
 .DS_Store
