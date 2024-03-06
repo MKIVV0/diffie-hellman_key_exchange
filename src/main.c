@@ -31,43 +31,32 @@ int main(void) {
     /* Entropy and DRBG contexts for generating the random prime numbers */
     mbedtls_entropy_context entropy;
     mbedtls_ctr_drbg_context ctr_drbg;
-    printf("1\n");
+
     init_drbg_contexts(&ctr_drbg, &entropy);
-    printf("2\n");
 
     /* Alice and Bob */
     mbedtls_dhm_context alice;
-    printf("2.1\n");
     mbedtls_dhm_context bob;
-    printf("2.2\n");
 
     printf("STARTING THE DIFFIE-HELLMAN SIMULATION...\n");
     
     // 1. Alice and Bob publicly agree on a shared key to use (p, g)
     /* Initialize both Alice's and Bob's contexts */
-    printf("3\n");
     init_dh_context(&alice);
-    printf("4\n");
     init_dh_context(&bob);
-    printf("5\n");
 
     // 2. Alice generates a secret key, combines it with the shared key and sends it (public value) to Bob
-    printf("6\n");
     generate_key_pair(&alice, &ctr_drbg, alice_public_key, sizeof(alice_public_key));
 
-    printf("7\n");
     // 3. Bob generates a secret key, combines it with the shared key and sends it (public value) to Alice
     generate_key_pair(&bob, &ctr_drbg, bob_public_key, sizeof(bob_public_key));
 
-    printf("8\n");
     // 4. Alice combines Bob's public value with her secret key
     compute_shared_secret(&alice, &ctr_drbg, bob_public_key, sizeof(bob_public_key), alice_shared_secret, sizeof(alice_shared_secret));
 
-    printf("9\n");
     // 5. Bob combines Alice's public value with his secret key
     compute_shared_secret(&bob, &ctr_drbg, alice_public_key, sizeof(alice_public_key), bob_shared_secret, sizeof(bob_shared_secret));
 
-    printf("10\n");
     // Test for the equality of the two shared secrets
     int passed = 1;
     for (size_t i = 0; i < sizeof(alice_shared_secret); i++) {
@@ -79,14 +68,12 @@ int main(void) {
     if (passed == 1) printf("The two shared secrets are the same!\n");
     else printf("The two shared secrets are not the same!\n");
 
-    printf("11\n");
     // The shared secret
     printf("Shared secret: 0x");
     for (size_t i = 0; i < sizeof(alice_shared_secret); i++) 
         printf("%x", alice_shared_secret[i]);
     printf("\n");
 
-    printf("12\n");
     /* Free all the contexts */
     mbedtls_dhm_free(&alice);
     mbedtls_dhm_free(&bob);

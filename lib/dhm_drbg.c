@@ -1,5 +1,6 @@
 #include "dhm_drbg.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <string.h>
 
 int init_drbg_contexts(mbedtls_ctr_drbg_context *ctr_drbg, mbedtls_entropy_context *entropy) {
     mbedtls_ctr_drbg_init(ctr_drbg);
