@@ -68,6 +68,11 @@ int generate_key_pair(mbedtls_dhm_context *dhm, mbedtls_ctr_drbg_context *ctr_dr
 int compute_shared_secret(mbedtls_dhm_context *dhm, mbedtls_ctr_drbg_context *ctr_drbg, const unsigned char *peer_pk, size_t peer_pk_len, unsigned char *shared_secret, size_t shared_secret_len) {
     int ret;
     
+    printf("PK: 0x");
+    for (int i = 0; i < peer_pk_len; i++)
+        printf("%x", peer_pk[i]);
+    printf("\n");
+
     // import the peer's public key
     ret = mbedtls_dhm_read_public(dhm, peer_pk, peer_pk_len);
     printf("1\n");
